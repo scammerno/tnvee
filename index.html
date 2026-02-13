@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Valentine Surprise</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .main-image {
+      position: relative;
+      width: 90%;
+      max-width: 900px;
+    }
+
+    .main-image img {
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    }
+
+    .buttons {
+      position: absolute;
+      bottom: 18%;
+      width: 100%;
+      display: flex;
+      justify-content: space-evenly;
+    }
+
+    button {
+      padding: 15px 35px;
+      border: none;
+      border-radius: 30px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    #yesBtn {
+      background-color: #d14b63;
+      color: white;
+    }
+
+    #noBtn {
+      background-color: #d14b63;
+      color: white;
+      position: relative;
+    }
+
+    /* Popup */
+    .popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      visibility: hidden;
+      opacity: 0;
+      transition: 0.4s ease;
+    }
+
+    .popup video {
+      width: 80%;
+      max-width: 600px;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+    }
+
+    .popup.show {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="main-image">
+    <!-- Replace valentine.png with your uploaded first image name -->
+    <img src="valentine.png" alt="Valentine Proposal" />
+
+    <div class="buttons">
+      <button id="yesBtn">YESSS</button>
+      <button id="noBtn">NO</button>
+    </div>
+  </div>
+
+  <!-- Popup Image -->
+  <div class="popup" id="popup">
+    <!-- Replace surprise.png with your second image -->
+    <video src="surprise.mp4" autoplay controls></video>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const popup = document.getElementById("popup");
+
+    // After 5 seconds, make NO button run away
+    setTimeout(() => {
+      noBtn.style.position = "absolute";
+
+      document.addEventListener("mousemove", moveButton);
+      document.addEventListener("touchstart", moveButton);
+    }, 5000);
+
+    function moveButton() {
+      const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+      const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    }
+
+    // YES button click → show popup image
+    yesBtn.addEventListener("click", () => {
+      popup.classList.add("show");
+    });
+  </script>
+
+</body>
+</html>
